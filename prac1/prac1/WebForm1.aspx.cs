@@ -40,6 +40,38 @@ namespace prac1
                 result = num1 / num2;
                 TextBox3.Text = result.ToString();
             }
+            
+            double base10Input = Convert.ToDouble(TextBox3.Text);
+            int whole = Convert.ToInt32(Math.Floor(base10Input));
+            double dec = base10Input - whole;
+            string binaryResult = Convert.ToString(whole, 2);
+            string binaryResult2 = "";
+            double firstDec = dec;
+
+            while (dec != 0)
+            {                
+                dec = dec * 2;
+                if (firstDec.Equals(dec)) {
+                    break;
+                }
+                else if (dec > 1)
+                {
+                    binaryResult2 = binaryResult2 + "1";
+                    dec = dec - 1;
+                }
+            }
+
+            if (binaryResult2.Equals(""))
+            {
+                string finalResult = binaryResult;
+                TextBox6.Text = finalResult;
+            }
+            else
+            {
+                string finalResult = binaryResult + "." + binaryResult2;
+                TextBox6.Text = finalResult;
+            }
+
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -53,88 +85,29 @@ namespace prac1
 
         protected void TextBox3_TextChanged(object sender, EventArgs e)
         {
-            /*double input = Convert.ToDouble(TextBox3.Text);
-            int whole = Convert.ToInt32(Math.Floor(input));
-            double dec = input - whole;
-            string binaryResult = "";
-            string binaryResult2 = "";
-            while (whole > 0)
-            {
-                binaryResult = (whole % 2).ToString() + binaryResult;
-                whole = whole / 2;
-            }
-            while (dec != 0)
-            {
-                dec = dec * 2;
-                if (dec > 1)
-                {
-                    binaryResult2 = binaryResult2 + "1";
-                    dec = dec - 1;
-                }
-            }
-            string finalResult = binaryResult + "." + binaryResult2;
-            TextBox6.Text = finalResult;*/
+            
         }
-        /* string base10Input = TextBox3.Text;
-         string binaryResult = "";
-         string binaryResult2 = "";
-         string[] splitInput = base10Input.Split('.');
-         int whole = Convert.ToInt32(splitInput[0]);
-         double dec = Convert.ToDouble(splitInput[1]);
-         if (dec == 0)
-         {
-             binaryResult = Convert.ToString(whole, 2);
-             TextBox6.Text = binaryResult;
-         }
-         else if (dec != 0)
-         {
-             while (whole > 0)
-             {
-                 binaryResult = whole % 2 + binaryResult;
-                 whole = whole / 2;
-             }
-             while (dec != 0)
-             {
-                 dec = dec * 2;
-                 if (dec > 1)
-                 {
-                     binaryResult2 = binaryResult2 + 1;
-                     dec = dec - 1;
-                 }
-             }
-             TextBox6.Text = binaryResult + "." + binaryResult2;
-         }*/
-
+         
         protected void TextBox6_TextChanged(object sender, EventArgs e)
         {
             
 
         }
 
-        protected void Button3_Click(object sender, EventArgs e)
+        protected void Button2_Click(object sender, EventArgs e)
         {
-
-            double input = Convert.ToDouble(TextBox3.Text);
-            int whole = Convert.ToInt32(Math.Floor(input));
-            double dec = input - whole;
-            string binaryResult = "";
-            string binaryResult2 = "";
-            while (whole > 0)
-            {
-                binaryResult = (whole % 2).ToString() + binaryResult;
-                whole = whole / 2;
+            string source = TextBox6.Text;
+            int count0 = 0;
+            int count1 = 0;
+            foreach (char zero in source) {
+                if (zero == '0') count0++;
             }
-            while (dec != 0)
+            TextBox4.Text = count0.ToString();
+            foreach (char one in source)
             {
-                dec = dec * 2;
-                if (dec > 1)
-                {
-                    binaryResult2 = binaryResult2 + "1";
-                    dec = dec - 1;
-                }
+                if (one == '1') count1++;
             }
-            string finalResult = binaryResult + "." + binaryResult2;
-            TextBox6.Text = finalResult;
+            TextBox5.Text = count1.ToString();
         }
     }
 }
